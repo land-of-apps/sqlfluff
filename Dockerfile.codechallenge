@@ -1,0 +1,19 @@
+FROM aictx-sqlfluff:code
+
+EXPOSE 30102
+
+WORKDIR /app
+
+RUN mkdir -p tmp
+COPY tmp tmp
+
+COPY appmap /usr/local/bin/appmap
+COPY source-index.sqlite .
+COPY appmap-index.sqlite .
+
+# Make sure that the AppMap directories as-built on the GitHub runner also
+# resolve inside the container.
+RUN mkdir -p /home/runner/work/sqlfluff
+RUN ln -s /app /home/runner/work/sqlfluff/sqlfluff
+
+CMD /usr/local/bin/appmap context-provider -d /app -p "${PORT:-30102}"
