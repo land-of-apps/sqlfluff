@@ -25,7 +25,9 @@ jobs:
           python-version: 3.11
 
       - name: Install dependencies
-        run: pip install tox
+        run: |
+          pip install tox
+          pip install appmap
 
       - name: Parse Python Version
         id: py_version
