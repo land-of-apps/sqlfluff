@@ -1,0 +1,28 @@
+name: Run tests
+
+on:
+  push:
+
+jobs:
+  python-test:
+    runs-on: ubuntu-latest
+    name: py3.11
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: pip install tox
+
+      - name: Parse Python Version
+        id: py_version
+        run: |
+          PYVERSION=$(echo "3.11" | sed -e 's/\.//g')
+          echo "PYVERSION=$PYVERSION" >> $GITHUB_OUTPUT
+
+      - name: Run the tests (without coverage)
+        run: tox -e py3.11 -- -n 2 test -m "not integration" --durations=16
