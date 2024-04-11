@@ -51,3 +51,13 @@ jobs:
         run: |
           cp -r /usr/local/bin/appmap .
           docker build -f Dockerfile.codechallenge -t sqlfluff:web --pull=false .
+
+      - name: Push to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+          docker tag sqlfluff:web registry.heroku.com/aictx-sqlfluff/web
+          docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
+          docker push registry.heroku.com/aictx-sqlfluff/web
+          heroku container:release -a aictx-sqlfluff web
