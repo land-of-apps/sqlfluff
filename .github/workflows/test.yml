@@ -50,4 +50,4 @@ jobs:
       - name: Docker build :web
         run: |
           cp -r /usr/local/bin/appmap .
-          env DOCKER_BUILDKIT=0 docker build -f Dockerfile.codechallenge -t sqlfluff:web --pull=false .
+          docker build -f Dockerfile.codechallenge -t sqlfluff:web --pull=false .

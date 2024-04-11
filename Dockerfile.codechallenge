@@ -1,4 +1,4 @@
-FROM aictx-sqlfluff:code
+FROM sqlfluff:code
 
 EXPOSE 30102
 
