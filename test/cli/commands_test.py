@@ -1,5 +1,6 @@
 """The Test file for CLI (General)."""
 
+import appmap
 import configparser
 import json
 import os
@@ -559,6 +560,8 @@ def test__cli__command_lint_parse(command):
         ),
     ],
 )
+
+@appmap.noappmap
 def test__cli__command_lint_parse_with_retcode(command, ret_code):
     """Check commands expecting a non-zero ret code."""
     invoke_assert_code(ret_code=ret_code, args=command)
@@ -1327,6 +1330,7 @@ def test__cli__command_lint_nocolor(isatty, should_strip_ansi, capsys, tmpdir):
     ["human", "yaml", "json", "github-annotation", "github-annotation-native", "none"],
 )
 @pytest.mark.parametrize("write_file", [None, "outfile"])
+@appmap.noappmap
 def test__cli__command_lint_serialize_multiple_files(serialize, write_file, tmp_path):
     """Test the output formats for multiple files.
 

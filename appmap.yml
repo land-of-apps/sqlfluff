@@ -1,0 +1,15 @@
+name: sqlfluff
+language: python
+appmap_dir: tmp/appmap
+packages:
+  - path: test
+  - path: sqlfluff
+    exclude:
+      - core.parser
+      - core.dialects.base.Dialect.replace
+      - core.rules.crawlers.SegmentSeekerCrawler.crawl
+      - core.string_helpers.curtail_string
+      - core.templaters.base.TemplatedFile.get_line_pos_of_char_pos
+      - utils.reflow
+  - path: example
+  - path: sqlfluff_templater_dbt

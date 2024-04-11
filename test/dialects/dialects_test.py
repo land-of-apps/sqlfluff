@@ -4,6 +4,7 @@ Any files in the test/fixtures/dialects/ directory will be picked up
 and automatically tested against the appropriate dialect.
 """
 import logging
+import appmap
 from typing import Any, Dict, Optional
 import pytest
 
@@ -58,6 +59,7 @@ def lex_and_parse(config_overrides: Dict[str, Any], raw: str) -> Optional[Parsed
 @pytest.mark.integration
 @pytest.mark.parse_suite
 @pytest.mark.parametrize("dialect,file", parse_success_examples)
+@appmap.noappmap
 def test__dialect__base_file_parse(dialect, file):
     """For given test examples, check successful parsing."""
     raw = load_file(dialect, file)
