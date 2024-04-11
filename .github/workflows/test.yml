@@ -41,7 +41,7 @@ jobs:
 
       - name: Collect and index AppMaps
         run: |
-          mkdir -p tmp && mv target/appmap tmp/
+          find tmp/appmap -maxdepth 3 | wc -l
           # Index the AppMap data, creating index directories.
           appmap index
           # Build source and AppMap data index files.
